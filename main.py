@@ -55,7 +55,7 @@ def process_command(command):
         print(f"Google search for: {command}")
 
 if __name__ == "__main__":
-    speak("Initializing Jarvis...")
+    speak("Initializing Abdullah...")
 
     while True:
         try:
@@ -72,11 +72,11 @@ if __name__ == "__main__":
                 print(f"You said: {word}")
 
                 # Respond to the keyword "Jarvis"
-                if word.lower() == "jarvis":
+                if word.lower() == "abdullah":
                     speak("Yes, how can I help?")
                     # listen for the command
                     with sr.Microphone() as source:
-                        print("Jarvis active, listening for command...")
+                        print("Abdullah active, listening for command...")
                         # Adjust for ambient noise
                         recognizer.adjust_for_ambient_noise(source)
                         # Capture the audio (increase timeout and phrase time limit for commands)
