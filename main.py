@@ -33,6 +33,10 @@ def process_command(command):
     elif "open instagram" in command:
         speak("Opening Instagram")
         os.system("start shell:AppsFolder\\Facebook.InstagramBeta_8xx8rvfyw5nnt!App")
+    # Open Whatsapp app (using correct identifier from AppsFolder)
+    elif "open whatsapp" in command:
+        speak("Opening Whatsapp")
+        os.system("start shell:AppsFolder\\5319275A.WhatsAppDesktop_cv1g1gvanyjgm!App")
 
     # Open installed applications (Windows examples)
     elif "open notepad" in command:
@@ -41,16 +45,16 @@ def process_command(command):
     elif "open calculator" in command:
         speak("Opening Calculator")
         os.startfile("calc.exe")
-    elif "open whatsapp" in command:
-        speak("Opening WhatsApp")
-        try:
-            # Full path to WhatsApp executable
-            path_to_whatsapp = "C:/Path/To/WhatsApp.exe"
-            os.startfile(path_to_whatsapp)
-        except FileNotFoundError:
-            speak("WhatsApp is not installed or path is incorrect.")
-        # Alternative for Microsoft Store version
-        os.system("start shell:AppsFolder\\5319275A.WhatsAppDesktop_cv1g1gvanyjgm!App")
+    # elif "open whatsapp" in command:
+    #     speak("Opening WhatsApp")
+    #     try:
+    #         # Full path to WhatsApp executable
+    #         path_to_whatsapp = "C:/Path/To/WhatsApp.exe"
+    #         os.startfile(path_to_whatsapp)
+    #     except FileNotFoundError:
+    #         speak("WhatsApp is not installed or path is incorrect.")
+    #     # Alternative for Microsoft Store version
+    #     os.system("start shell:AppsFolder\\5319275A.WhatsAppDesktop_cv1g1gvanyjgm!App")
 
     # Close calculator
     elif "close calculator" in command:
