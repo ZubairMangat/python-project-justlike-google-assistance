@@ -14,7 +14,8 @@ def speak(text):
 def process_command(command):
     command = command.lower()
     print(f"Processing command: {command}")  # Debugging print
-    
+
+    # Open websites
     if "open google" in command:
         speak("Opening Google")
         webbrowser.open("https://www.google.com")
@@ -35,11 +36,20 @@ def process_command(command):
     elif "open calculator" in command:
         speak("Opening Calculator")
         os.startfile("calc.exe")
+    elif "open whatsapp" in command:
+        speak("Opening WhatsApp")
+        try:
+            # Full path to WhatsApp executable
+            path_to_whatsapp = "C:/Path/To/WhatsApp.exe"
+            os.startfile(path_to_whatsapp)
+        except FileNotFoundError:
+            speak("WhatsApp is not installed or path is incorrect.")
+        # Alternative for Microsoft Store version
+        os.system("start shell:AppsFolder\\5319275A.WhatsAppDesktop_cv1g1gvanyjgm!App")
 
     # Close calculator
     elif "close calculator" in command:
         speak("Closing Calculator")
-        # First, check if calc.exe is running
         is_running = os.system("tasklist | findstr /i calc.exe") == 0
         if is_running:
             os.system("taskkill /f /im calc.exe")
@@ -61,26 +71,26 @@ if __name__ == "__main__":
         try:
             # Use the microphone for input
             with sr.Microphone() as source:
-                print("Listening for 'Jarvis'...")
-                # Adjust for ambient noise for better accuracy
-                recognizer.adjust_for_ambient_noise(source)
-                # Capture the audio
-                audio = recognizer.listen(source, timeout=5, phrase_time_limit=3)
+                print("Listening for 'abdullah'...")
+                # Reduced time for ambient noise adjustment
+                recognizer.adjust_for_ambient_noise(source, duration=0.5)
+
+                # Capture the audio with increased timeout and phrase limit
+                audio = recognizer.listen(source, timeout=7, phrase_time_limit=5)
 
                 # Convert speech to text
                 word = recognizer.recognize_google(audio)
                 print(f"You said: {word}")
 
-                # Respond to the keyword "Jarvis"
+                # Respond to the keyword "abdullah"
                 if word.lower() == "abdullah":
                     speak("Yes, how can I help?")
-                    # listen for the command
+
+                    # Listen for the command with adjusted timeout
                     with sr.Microphone() as source:
                         print("Abdullah active, listening for command...")
-                        # Adjust for ambient noise
-                        recognizer.adjust_for_ambient_noise(source)
-                        # Capture the audio (increase timeout and phrase time limit for commands)
-                        audio = recognizer.listen(source, timeout=5, phrase_time_limit=5)
+                        recognizer.adjust_for_ambient_noise(source, duration=0.5)
+                        audio = recognizer.listen(source, timeout=7, phrase_time_limit=5)
 
                         # Convert speech to text
                         command = recognizer.recognize_google(audio)
@@ -93,5 +103,6 @@ if __name__ == "__main__":
             print("Timeout: No speech detected.")
         except sr.UnknownValueError:
             print("Sorry, I did not understand that.")
-        except sr.RequestError:
-            print("Could not request results from the Google Speech Recognition service.")
+        except sr.RequestError as e:
+            print(f"Could not request results from the Google Speech Recognition service; {e}")
+ 
