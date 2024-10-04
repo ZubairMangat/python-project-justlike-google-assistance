@@ -29,6 +29,11 @@ def process_command(command):
         speak("Opening LinkedIn")
         webbrowser.open("https://www.linkedin.com")
 
+    # Open Instagram app (using correct identifier from AppsFolder)
+    elif "open instagram" in command:
+        speak("Opening Instagram")
+        os.system("start shell:AppsFolder\\Facebook.InstagramBeta_8xx8rvfyw5nnt!App")
+
     # Open installed applications (Windows examples)
     elif "open notepad" in command:
         speak("Opening Notepad")
@@ -105,4 +110,3 @@ if __name__ == "__main__":
             print("Sorry, I did not understand that.")
         except sr.RequestError as e:
             print(f"Could not request results from the Google Speech Recognition service; {e}")
- 
