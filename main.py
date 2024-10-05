@@ -2,6 +2,7 @@ import speech_recognition as sr
 import pyttsx3
 import webbrowser
 import os
+import musiclibrary
 
 # Initialize the recognizer and text-to-speech engine
 recognizer = sr.Recognizer()
@@ -28,6 +29,12 @@ def process_command(command):
     elif "open linkedin" in command:
         speak("Opening LinkedIn")
         webbrowser.open("https://www.linkedin.com")
+    elif command.startswith("play"):
+        song=command.split(" ")[1]
+        link=musiclibrary.music[song]
+        webbrowser.open(link)
+
+        
 
     # Open Instagram app (using correct identifier from AppsFolder)
     elif "open instagram" in command:
